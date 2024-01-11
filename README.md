@@ -1,0 +1,1 @@
+# f-lab-spa-project-template
