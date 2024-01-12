@@ -1,4 +1,5 @@
 import "./reset.css";
+import "./style.css";
 
 export default class App extends HTMLElement {
   constructor() {
