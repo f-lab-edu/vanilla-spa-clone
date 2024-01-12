@@ -3,24 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
     <title>토스 기술 블로그, 토스 테크</title>
   </head>
   <body>
     <template id="header">
       <header class="header">
-        <h1>
-          <a href="">
-            <img src="#" alt="로고" />
-          </a>
-        </h1>
-        <nav>
-          <ul>
-            <li><a href="#">디자인</a></li>
-            <li><a href="#">개발</a></li>
-            <li><button type="button">채용 바로가기</button></li>
-          </ul>
-        </nav>
-        <button><img src="" alt="메뉴 아이콘" /></button>
+        <div class="container header__container">
+          <h1 class="header__logo">
+            <a class="header__logo-a" href="/tech">
+              <img
+                class="header__logo-icon"
+                src="./assets/toss-logo.svg"
+                alt="토스 로고"
+              />
+            </a>
+          </h1>
+          <nav class="nav">
+            <ul class="nav__list">
+              <li class="nav__list-item">
+                <a class="nav__list-a" href="/design">
+                  <span class="nav__list-text">디자인</span>
+                </a>
+              </li>
+              <li class="nav__list-item">
+                <a class="nav__list-a" href="/tech">
+                  <span class="nav__list-text">개발</span>
+                </a>
+              </li>
+              <li class="nav__list-item">
+                <button class="nav__list-button" type="button">
+                  채용 바로가기
+                </button>
+              </li>
+            </ul>
+          </nav>
+          <div class="header__menu">
+            <button class="header__menu-button">
+              <img
+                class="header__menu-icon"
+                src="./assets/hamburger-icon.svg"
+                alt="메뉴 아이콘"
+              />
+            </button>
+          </div>
+        </div>
       </header>
     </template>
     <template id="article-item">
@@ -69,19 +96,19 @@
         </address>
         <ul>
           <li>
-            <a href="#"><img src="" alt="페이스북 아이콘" /></a>
+            <a href="#"><img src="#" alt="페이스북 아이콘" /></a>
           </li>
           <li>
-            <a href="#"><img src="" alt="블로그 아이콘" /></a>
+            <a href="#"><img src="#" alt="블로그 아이콘" /></a>
           </li>
           <li>
-            <a href="#"><img src="" alt="네이버 아이콘" /></a>
+            <a href="#"><img src="#" alt="네이버 아이콘" /></a>
           </li>
           <li>
-            <a href="#"><img src="" alt="트위터 아이콘" /></a>
+            <a href="#"><img src="#" alt="트위터 아이콘" /></a>
           </li>
           <li>
-            <a href="#"><img src="" alt="인스타그램 아이콘" /></a>
+            <a href="#"><img src="#" alt="인스타그램 아이콘" /></a>
           </li>
         </ul>
       </footer>
