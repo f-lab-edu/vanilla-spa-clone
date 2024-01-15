@@ -3,3 +3,22 @@
   height: 100%;
   padding: 0px 24px;
 }
+
+.button {
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  background: #3182f6;
+  color: #f9fafb;
+  font-size: 14px;
+  font-weight: 600px;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.1s ease;
+}
+
+.button:hover {
+  color: #ffffff;
+  background: #1b64da;
+}
