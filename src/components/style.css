@@ -1,21 +1,14 @@
-.container {
-  width: 100%;
-  height: 100%;
-  padding: 0px 24px;
-}
-
 .button {
-  border: none;
-  border-radius: 6px;
   padding: 7px 12px;
-  background: #3182f6;
-  color: #f9fafb;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: 600px;
   line-height: 18px;
   text-align: center;
-  cursor: pointer;
+  color: #f9fafb;
+  background: #3182f6;
   transition: background 0.2s ease, color 0.1s ease;
+  cursor: pointer;
 }
 
 .button:hover {
