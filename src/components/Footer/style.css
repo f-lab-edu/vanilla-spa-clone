@@ -1,0 +1,74 @@
+.footer__section {
+  margin-top: 440px;
+}
+
+.footer__section {
+  width: 100%;
+  padding: 60px 24px;
+  background-color: rgba(2, 9, 19, 0.91);
+}
+
+.footer__section-wrap {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  grid-column-gap: 20px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.footer__section-image {
+  width: 186px;
+  height: 186px;
+}
+
+.footer__setcion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.footer__section-title {
+  font-size: 26px;
+  line-height: 1.4;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.footer__section-text {
+  margin-top: 8px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: #e5e8eb;
+}
+
+.footer__section-button {
+  margin-top: 24px;
+  font-weight: 600;
+}
+
+/* footer__section 700px 이하 */
+@media (max-width: 700px) {
+  .footer__section {
+    padding-top: 24px;
+  }
+
+  .footer__section-wrap {
+    grid-template-rows: min-content auto;
+    grid-template-columns: 1fr;
+    grid-row-gap: 24px;
+  }
+
+  .footer__section-image {
+    width: 90px;
+    height: 90px;
+  }
+
+  .footer__section-title {
+    font-size: 20px;
+  }
+
+  .footer__section-text {
+    font-size: 16px;
+  }
+}
