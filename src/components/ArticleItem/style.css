@@ -49,6 +49,8 @@
   line-height: 1.6;
   color: #4e5968;
   text-overflow: ellipsis;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .article-item__date {

@@ -9,11 +9,14 @@
 }
 
 .header__wrap {
-  display: flex;
+  width: 100%;
   max-width: 1140px;
-  width: calc(100% - 48px);
   height: 100%;
-  margin: 0 auto;
+  margin: auto;
+}
+
+.header__inner {
+  display: flex;
 }
 
 /* Header 로고 */
@@ -77,7 +80,7 @@
 /* Header 640px 미만 */
 
 @media (max-width: 639px) {
-  .header__wrap {
+  .header__inner {
     flex-direction: column;
   }
 
