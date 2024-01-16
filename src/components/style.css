@@ -15,3 +15,11 @@
   color: #ffffff;
   background: #1b64da;
 }
+
+.container {
+  width: 92%;
+  max-width: calc(100% - 48px);
+  height: 100%;
+  margin: 0 auto;
+}
+
