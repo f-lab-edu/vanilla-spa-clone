@@ -34,10 +34,6 @@ const FOOTER_ICON_LIST = [
 ];
 
 export default class FooterIconList extends HTMLElement {
-  constructor() {
-    super();
-  }
-
   createIcon(item) {
     const li = document.createElement("li");
     li.classList.add("footer__icon-item");
