@@ -47,10 +47,6 @@ const FOOTER_LIST = [
 ];
 
 export default class FooterList extends HTMLElement {
-  constructor() {
-    super();
-  }
-
   createTitle(title) {
     const li = document.createElement("li");
     li.classList.add("footer__list-item");
