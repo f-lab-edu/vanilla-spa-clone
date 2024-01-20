@@ -1,0 +1,39 @@
+.footer__list-wrap {
+  display: flex;
+  padding-bottom: 50px;
+}
+
+.footer__list {
+  width: 170px;
+  line-height: 30px;
+}
+
+.footer__list:last-child {
+  flex: 1;
+}
+
+.footer__list-title {
+  padding-bottom: 5px;
+  color: #333d4b;
+  font-weight: bold;
+}
+
+.footer__list-a {
+  color: #6b7684;
+}
+
+.footer__list-a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .footer__list-wrap {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .footer__list {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+}
