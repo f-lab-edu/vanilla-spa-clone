@@ -5,16 +5,7 @@ export default class ArticleItem extends HTMLElement {
   constructor() {
     super();
     this.data = {};
-
-    const HTMLTemplate = new DOMParser()
-      .parseFromString(template, "text/html")
-      .querySelector("template");
-    const styleElement = document.createElement("style");
-    styleElement.textContent = style;
-
     this.attachShadow({ mode: "open" });
-    this.shadowRoot.appendChild(HTMLTemplate.content.cloneNode(true));
-    this.shadowRoot.appendChild(styleElement);
   }
 
   setData(data) {
@@ -22,16 +13,35 @@ export default class ArticleItem extends HTMLElement {
     this.render();
   }
 
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    return `${year}. ${month}. ${day}`;
+  }
+
   render() {
-    this.shadowRoot.querySelector(".article-item__a").href =
+    const HTMLTemplate = new DOMParser()
+      .parseFromString(template, "text/html")
+      .querySelector("template");
+    const styleElement = document.createElement("style");
+    styleElement.textContent = style;
+
+    HTMLTemplate.content.querySelector(".article-item__a").href =
       "article/" + this.data.id;
-    this.shadowRoot.querySelector(".article-item__image").src =
+    HTMLTemplate.content.querySelector(".article-item__image").src =
       this.data.imageUrl;
-    this.shadowRoot.querySelector(".article-item__title").textContent =
+    HTMLTemplate.content.querySelector(".article-item__title").textContent =
       this.data.title;
-    this.shadowRoot.querySelector(".article-item__description").textContent =
-      this.data.description;
-    this.shadowRoot.querySelector(".article-item__date").textContent =
-      this.data.createdAt;
+    HTMLTemplate.content.querySelector(
+      ".article-item__description"
+    ).textContent = this.data.description;
+    HTMLTemplate.content.querySelector(".article-item__date").textContent =
+      this.formatDate(this.data.createdAt);
+
+    this.shadowRoot.appendChild(HTMLTemplate.content.cloneNode(true));
+    this.shadowRoot.appendChild(styleElement);
   }
 }
