@@ -12,10 +12,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
         test: /\.js$/i,
         exclude: /node_modules/,
         use: {
@@ -30,6 +26,18 @@ module.exports = {
         use: ["html-loader"],
       },
       {
+        test: /\.css$/i,
+        oneOf: [
+          {
+            resourceQuery: /shadow/,
+            type: "asset/source",
+          },
+          {
+            use: ["style-loader", "css-loader"],
+          },
+        ],
+      },
+      {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
         type: "asset/resource",
       },
@@ -39,6 +47,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.resolve(__dirname, "src/index.html"),
+      favicon: path.resolve(__dirname, "src/assets/favicon.ico"),
     }),
   ],
 };
