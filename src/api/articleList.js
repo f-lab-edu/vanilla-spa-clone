@@ -7,7 +7,6 @@ export const getArticleList = async () => {
       url: "data/mockArticleList.json",
     });
     const data = await response.data;
-
     return data;
   } catch (error) {
     console.error(error);
