@@ -1,8 +1,7 @@
 import template from "./template.html";
 import "./style.css";
 
-// 임시 정적 데이터
-import data from "../../data/mockArticle.json";
+import { getArticleList } from "@/api/articleList";
 
 // 임시 현재 경로
 const CURRENT_PATH = "tech";
@@ -18,24 +17,46 @@ export default class ArticleList extends HTMLElement {
     this.template = new DOMParser()
       .parseFromString(template, "text/html")
       .querySelector("template").content;
+
+    this._articles = [];
   }
 
-  addArticles(ulElement, articles) {
-    articles.forEach((item) => {
+  notifyArticleListLoaded() {
+    const event = new CustomEvent("articleListLoaded");
+
+    this.dispatchEvent(event);
+  }
+
+  async getArticles() {
+    const data = await getArticleList();
+    this._articles = [...this._articles, ...data.results];
+
+    this.notifyArticleListLoaded();
+  }
+
+  addArticles(ulElement) {
+    this._articles.forEach((item) => {
       const articleItemElement = document.createElement("article-item");
-      articleItemElement.setData(item);
+      articleItemElement.articleData = item;
       ulElement.appendChild(articleItemElement);
     });
   }
 
-  connectedCallback() {
-    console.log(this.template);
+  render() {
     const titleElement = this.template.querySelector(".article-list__title");
     titleElement.textContent = TITLE_MAP[CURRENT_PATH];
 
     const ulElement = this.template.querySelector(".article-list__ul");
 
-    this.addArticles(ulElement, data.results);
+    this.addArticles(ulElement);
     this.appendChild(this.template.cloneNode(true));
+  }
+
+  connectedCallback() {
+    this.addEventListener("articleListLoaded", () => {
+      this.render();
+    });
+
+    this.getArticles();
   }
 }
