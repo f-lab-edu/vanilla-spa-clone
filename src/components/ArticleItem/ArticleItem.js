@@ -10,25 +10,38 @@ export default class ArticleItem extends HTMLElement {
       .parseFromString(template, "text/html")
       .querySelector("template").content;
 
-    this.data = {};
+    this._articleData = {
+      id: "",
+      title: "",
+      description: "",
+      imageUrl: "",
+      createdAt: "",
+    };
   }
 
-  setData(data) {
-    this.data = data;
+  setArticleData(data) {
+    this._articleData = {
+      id: data.id,
+      title: data.title,
+      description: data.description,
+      imageUrl: data.imageUrl,
+      createdAt: data.createdAt,
+    };
+
     this.render();
   }
 
   render() {
     this.template.querySelector(".article-item__a").href =
-      "article/" + this.data.id;
+      "article/" + this._articleData.id;
     this.template.querySelector(".article-item__image").src =
-      this.data.imageUrl;
+      this._articleData.imageUrl;
     this.template.querySelector(".article-item__title").textContent =
-      this.data.title;
+      this._articleData.title;
     this.template.querySelector(".article-item__description").textContent =
-      this.data.description;
+      this._articleData.description;
     this.template.querySelector(".article-item__date").textContent = formatDate(
-      this.data.createdAt
+      this._articleData.createdAt
     );
 
     const liElement = document.createElement("li");
