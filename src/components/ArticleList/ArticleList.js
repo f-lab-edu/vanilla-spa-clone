@@ -29,7 +29,7 @@ export default class ArticleList extends HTMLElement {
 
   async getArticles() {
     const data = await getArticleList();
-    this._articles = [...this._articles, ...data.results];
+    this._articles = data.results;
 
     this.notifyArticleListLoaded();
   }
@@ -37,7 +37,7 @@ export default class ArticleList extends HTMLElement {
   addArticles(ulElement) {
     this._articles.forEach((item) => {
       const articleItemElement = document.createElement("article-item");
-      articleItemElement.articleData = item;
+      articleItemElement.setArticleData(item);
       ulElement.appendChild(articleItemElement);
     });
   }
