@@ -1,5 +1,5 @@
 import template from "./template.html";
-import style from "./style.css?shadow";
+import "./style.css";
 
 // 임시 정적 데이터
 import data from "../../data/mockArticle.json";
@@ -15,10 +15,9 @@ const TITLE_MAP = {
 export default class ArticleList extends HTMLElement {
   constructor() {
     super();
-
-    if (!this.shadowRoot) {
-      this.attachShadow({ mode: "open" });
-    }
+    this.template = new DOMParser()
+      .parseFromString(template, "text/html")
+      .querySelector("template").content;
   }
 
   addArticles(ulElement, articles) {
@@ -30,20 +29,13 @@ export default class ArticleList extends HTMLElement {
   }
 
   connectedCallback() {
-    const HTMLTemplate = new DOMParser()
-      .parseFromString(template, "text/html")
-      .querySelector("template").content;
-    const styleElement = document.createElement("style");
-    styleElement.textContent = style;
-
-    const titleElement = HTMLTemplate.querySelector(".article-list__title");
+    console.log(this.template);
+    const titleElement = this.template.querySelector(".article-list__title");
     titleElement.textContent = TITLE_MAP[CURRENT_PATH];
 
-    const ulElement = HTMLTemplate.querySelector(".article-list__ul");
+    const ulElement = this.template.querySelector(".article-list__ul");
 
     this.addArticles(ulElement, data.results);
-
-    this.shadowRoot.appendChild(HTMLTemplate.cloneNode(true));
-    this.shadowRoot.appendChild(styleElement);
+    this.appendChild(this.template.cloneNode(true));
   }
 }
