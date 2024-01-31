@@ -1,9 +1,9 @@
 import "./style.css";
-import facebookIcon from "@assets/facebook-icon.svg";
-import blogIcon from "@assets/blog-icon.svg";
-import naverIcon from "@assets/naver-icon.svg";
-import twitterIcon from "@assets/twitter-icon.svg";
-import instagramIcon from "@assets/instagram-icon.svg";
+import facebookIcon from "../../../public/assets/facebook-icon.svg";
+import blogIcon from "../../../public/assets/blog-icon.svg";
+import naverIcon from "../../../public/assets/naver-icon.svg";
+import twitterIcon from "../../../public/assets/twitter-icon.svg";
+import instagramIcon from "../../../public/assets/instagram-icon.svg";
 
 const FOOTER_ICON_LIST = [
   {

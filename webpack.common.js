@@ -8,9 +8,6 @@ module.exports = {
     extensions: [".js"],
     alias: {
       "@": path.resolve(__dirname, "src"),
-      "@public": path.resolve(__dirname, "public"),
-      "@assets": path.resolve(__dirname, "public/assets"),
-      "@components": path.resolve(__dirname, "src/components"),
     },
   },
   output: {
