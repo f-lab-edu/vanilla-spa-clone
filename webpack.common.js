@@ -27,15 +27,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        oneOf: [
-          {
-            resourceQuery: /shadow/,
-            type: "asset/source",
-          },
-          {
-            use: ["style-loader", "css-loader"],
-          },
-        ],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
