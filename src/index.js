@@ -18,7 +18,8 @@ customElements.define("footer-icon-list", FooterIconList);
 customElements.define("article-list", ArticleList);
 customElements.define("article-item", ArticleItem);
 
-const router = new Router();
+const app = new App();
+const router = new Router(app);
 
 router.addRoute("/", () => ArticleListPage("tech"));
 router.addRoute("/tech", () => ArticleListPage("tech"));

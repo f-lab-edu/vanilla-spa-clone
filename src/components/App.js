@@ -4,16 +4,19 @@ import "./style.css";
 export default class App extends HTMLElement {
   constructor() {
     super();
-    this.template = document.getElementById("app");
+    this._root = document.getElementById("root");
   }
 
-  connectedCallback() {
+  render(component) {
     window.requestAnimationFrame(() => {
-      const callback = function (child) {
-        this.appendChild(child.cloneNode(true));
-      }.bind(this);
+      const header = document.createElement("blog-header");
+      const footer = document.createElement("blog-footer");
 
-      Array.from(this.template.content.children).forEach(callback);
+      this.appendChild(header);
+      this.appendChild(component);
+      this.appendChild(footer);
+
+      this._root.appendChild(this);
     });
   }
 }
