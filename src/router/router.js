@@ -3,7 +3,7 @@ export default class Router {
     this._app = app;
     this._routes = [];
     this._currentPath = null;
-    this._notFound = () => {};
+    this._notFoundPage = null;
   }
 
   addRoute(path, page) {
@@ -30,8 +30,8 @@ export default class Router {
     return params;
   }
 
-  setNotFound(page) {
-    this._notFound = page;
+  setNotFoundPage(page) {
+    this._notFoundPage = page;
   }
 
   checkRoutes() {
@@ -44,7 +44,7 @@ export default class Router {
     const route = this._routes.find(({ regex }) => regex.test(pathname));
 
     if (!route) {
-      this._notFound();
+      this._app.render(this._notFound());
       return;
     }
 
