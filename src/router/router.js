@@ -2,6 +2,7 @@ export default class Router {
   constructor() {
     this._routes = [];
     this._currentPath = null;
+    this._notFound = () => {};
   }
 
   addRoute(path, page) {
@@ -28,6 +29,10 @@ export default class Router {
     return params;
   }
 
+  setNotFound(page) {
+    this._notFound = page;
+  }
+
   checkRoutes() {
     const { pathname } = location;
 
@@ -38,11 +43,13 @@ export default class Router {
     const route = this._routes.find(({ regex }) => regex.test(pathname));
 
     if (!route) {
-      // TODO: Not Found
+      this._notFound();
       return;
     }
 
     const params = this.extractParams(route, pathname);
+
+    route.page(params);
   }
 
   start() {
