@@ -1,24 +1,27 @@
 import template from "./template.html";
 import "./style.css";
 
-import { getArticleList } from "@/api/articleList";
-
-// 임시 현재 경로
-const CURRENT_PATH = "tech";
+import { getTechArticleList, getDesignArticleList } from "@/api/articleList";
 
 const TITLE_MAP = {
   tech: "개발",
   design: "디자인",
 };
 
+const FETCHER_MAP = {
+  tech: getTechArticleList,
+  design: getDesignArticleList,
+};
+
 export default class ArticleList extends HTMLElement {
-  constructor() {
+  constructor(path) {
     super();
     this.template = new DOMParser()
       .parseFromString(template, "text/html")
       .querySelector("template").content;
 
     this._articles = [];
+    this._path = path;
   }
 
   notifyArticleListLoaded() {
@@ -28,7 +31,7 @@ export default class ArticleList extends HTMLElement {
   }
 
   async getArticles() {
-    const data = await getArticleList();
+    const data = await FETCHER_MAP[this._path]();
     this._articles = data.results;
 
     this.notifyArticleListLoaded();
@@ -44,7 +47,7 @@ export default class ArticleList extends HTMLElement {
 
   render() {
     const titleElement = this.template.querySelector(".article-list__title");
-    titleElement.textContent = TITLE_MAP[CURRENT_PATH];
+    titleElement.textContent = TITLE_MAP[this._path];
 
     const ulElement = this.template.querySelector(".article-list__ul");
 
