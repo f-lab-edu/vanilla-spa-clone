@@ -25,5 +25,5 @@ router.addRoute("/", () => ArticleListPage("tech"));
 router.addRoute("/tech", () => ArticleListPage("tech"));
 router.addRoute("/design", () => ArticleListPage("design"));
 router.addRoute("/article/:id", ArticlePage);
-router.setNotFound(NotFoundPage);
+router.setNotFoundPage(NotFoundPage);
 router.start();
