@@ -1,5 +1,6 @@
 export default class Router {
-  constructor() {
+  constructor(app) {
+    this._app = app;
     this._routes = [];
     this._currentPath = null;
     this._notFound = () => {};
@@ -49,7 +50,7 @@ export default class Router {
 
     const params = this.extractParams(route, pathname);
 
-    route.page(params);
+    this._app.render(route.page(params));
   }
 
   start() {
