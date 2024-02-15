@@ -1,7 +1,7 @@
 import template from "./template.html";
 import "./style.css";
 
-import { formatDate } from "../../utils/formatDate";
+import { formatDate } from "@/utils/formatDate";
 
 export default class ArticleItem extends HTMLElement {
   constructor() {

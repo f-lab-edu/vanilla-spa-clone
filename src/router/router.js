@@ -1,6 +1,6 @@
 export default class Router {
-  constructor(app) {
-    this._app = app;
+  constructor(section) {
+    this._section = section;
     this._routes = [];
     this._currentPath = null;
     this._notFoundPage = null;
@@ -34,6 +34,11 @@ export default class Router {
     this._notFoundPage = page;
   }
 
+  navigate(path) {
+    history.pushState(null, null, path);
+    this.checkRoutes();
+  }
+
   checkRoutes() {
     const { pathname } = location;
 
@@ -43,17 +48,29 @@ export default class Router {
 
     const route = this._routes.find(({ regex }) => regex.test(pathname));
 
+    this._section.innerHTML = "";
+
     if (!route) {
-      this._app.render(this._notFound());
+      this._section.appendChild(this._notFoundPage());
       return;
     }
 
     const params = this.extractParams(route, pathname);
 
-    this._app.render(route.page(params));
+    this._section.appendChild(route.page(params));
   }
 
   start() {
+    window.onpopstate = () => this.checkRoutes();
     this.checkRoutes();
+
+    const a = document.querySelectorAll("a[data-navigation]");
+
+    a.forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.navigate(el.getAttribute("href"));
+      });
+    });
   }
 }
