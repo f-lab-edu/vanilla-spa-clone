@@ -64,13 +64,13 @@ export default class Router {
     window.onpopstate = () => this.checkRoutes();
     this.checkRoutes();
 
-    const a = document.querySelectorAll("a[data-navigation]");
+    document.body.addEventListener("click", (event) => {
+      const link = event.target.closest("a[data-navigation]");
 
-    a.forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        this.navigate(el.getAttribute("href"));
-      });
+      if (link) {
+        event.preventDefault();
+        this.navigate(link.getAttribute("href"));
+      }
     });
   }
 }
