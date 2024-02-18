@@ -61,16 +61,7 @@ export default class Router {
   }
 
   start() {
-    window.onpopstate = () => this.checkRoutes();
+    window.addEventListener("popstate", () => this.checkRoutes());
     this.checkRoutes();
-
-    document.body.addEventListener("click", (event) => {
-      const link = event.target.closest("a[data-navigation]");
-
-      if (link) {
-        event.preventDefault();
-        this.navigate(link.getAttribute("href"));
-      }
-    });
   }
 }

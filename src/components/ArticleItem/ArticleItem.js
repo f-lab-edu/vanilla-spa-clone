@@ -49,4 +49,15 @@ export default class ArticleItem extends HTMLElement {
 
     this.appendChild(liElement);
   }
+
+  connectedCallback() {
+    const a = this.querySelector("a[data-navigation]");
+
+    a.addEventListener("click", (event) => {
+      event.preventDefault();
+      const path = a.getAttribute("href");
+      history.pushState(null, null, path);
+      window.dispatchEvent(new Event("popstate"));
+    });
+  }
 }
