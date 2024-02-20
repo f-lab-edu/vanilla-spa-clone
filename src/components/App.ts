@@ -2,7 +2,7 @@ import "./reset.css";
 import "./style.css";
 
 export default class App extends HTMLElement {
-  connectedCallback() {
+  connectedCallback(): void {
     window.requestAnimationFrame(() => {
       const header = document.createElement("blog-header");
       const section = document.createElement("blog-section");
