@@ -7,12 +7,12 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     },
+    "typeRoots": ["src/types"],
     "sourceMap": true,
     "allowJs": true,
     "checkJs": false
