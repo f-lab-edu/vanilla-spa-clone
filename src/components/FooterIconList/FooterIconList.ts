@@ -5,7 +5,13 @@ import naverIcon from "../../../public/assets/naver-icon.svg";
 import twitterIcon from "../../../public/assets/twitter-icon.svg";
 import instagramIcon from "../../../public/assets/instagram-icon.svg";
 
-const FOOTER_ICON_LIST = [
+interface IconItem {
+  url: string;
+  icon: string;
+  alt: string;
+}
+
+const FOOTER_ICON_LIST: IconItem[] = [
   {
     url: "https://www.facebook.com/toss.official",
     icon: facebookIcon,
@@ -34,34 +40,21 @@ const FOOTER_ICON_LIST = [
 ];
 
 export default class FooterIconList extends HTMLElement {
-  createIcon(item) {
-    const li = document.createElement("li");
-    li.classList.add("footer__icon-item");
-
-    const a = document.createElement("a");
-    a.classList.add("footer__icon-a");
-    a.href = item.url;
-
-    const img = document.createElement("img");
-    img.classList.add("footer__icon-image");
-    img.src = item.icon;
-    img.alt = item.alt;
-
-    a.appendChild(img);
-    li.appendChild(a);
-
-    return li;
+  createIcon(item: IconItem): string {
+    return `
+      <li class="footer__icon-item">
+        <a class="footer__icon-a" href="${item.url}">
+          <img class="footer__icon-image" src="${item.icon}" alt="${item.alt}">
+        </a>
+      </li>
+    `;
   }
 
-  connectedCallback() {
-    const ul = document.createElement("ul");
-    ul.classList.add("footer__icon-list");
-
-    FOOTER_ICON_LIST.forEach((item) => {
-      const li = this.createIcon(item);
-      ul.appendChild(li);
-    });
-
-    this.appendChild(ul);
+  connectedCallback(): void {
+    this.innerHTML = `
+      <ul class="footer__icon-list">
+        ${FOOTER_ICON_LIST.map((item) => this.createIcon(item)).join("")}
+      </ul>
+    `;
   }
 }
