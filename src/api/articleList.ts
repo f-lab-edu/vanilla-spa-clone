@@ -1,5 +1,5 @@
-import request from "./axios";
 import axios, { AxiosResponse } from "axios";
+import request from "./axios";
 import { Article } from "@/types/types";
 
 export const getTechArticleList = async (): Promise<Article[]> => {
