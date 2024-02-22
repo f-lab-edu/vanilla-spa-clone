@@ -11,6 +11,16 @@ export default class Header extends HTMLElement {
       .querySelector("template")?.content;
   }
 
+  handleNavigationClick(event: Event): void {
+    if (!(event.target instanceof HTMLAnchorElement)) return;
+
+    event.preventDefault();
+    const path = event.target.getAttribute("href");
+
+    history.pushState("", "", path);
+    window.dispatchEvent(new CustomEvent("pageNavigation"));
+  }
+
   connectedCallback(): void {
     if (!this.template) return;
 
@@ -20,15 +30,7 @@ export default class Header extends HTMLElement {
       this.querySelectorAll("a[data-navigation]");
 
     aList.forEach((a) => {
-      a.addEventListener("click", (event: Event) => {
-        event.preventDefault();
-        const path = a.getAttribute("href");
-
-        if (path) {
-          history.pushState("", "", path);
-          window.dispatchEvent(new CustomEvent("pageNavigation"));
-        }
-      });
+      a.addEventListener("click", this.handleNavigationClick);
     });
   }
 }
