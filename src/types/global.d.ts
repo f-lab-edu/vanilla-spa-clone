@@ -16,4 +16,8 @@ declare global {
     "footer-list": FooterList;
     "footer-icon-list": FooterIconList;
   }
+
+  interface WindowEventMap {
+    pageNavigation: CustomEvent<{ path: string }>;
+  }
 }
