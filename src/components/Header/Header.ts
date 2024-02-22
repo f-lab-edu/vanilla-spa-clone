@@ -16,9 +16,9 @@ export default class Header extends HTMLElement {
 
     event.preventDefault();
     const path = event.target.getAttribute("href");
-
-    history.pushState("", "", path);
-    window.dispatchEvent(new CustomEvent("pageNavigation"));
+    window.dispatchEvent(
+      new CustomEvent("pageNavigation", { detail: { path } })
+    );
   }
 
   connectedCallback(): void {

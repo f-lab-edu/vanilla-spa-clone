@@ -16,11 +16,17 @@ export default class Section extends HTMLElement {
     this.router.addRoute("/", () => ArticleListPage("tech"));
     this.router.addRoute("/tech", () => ArticleListPage("tech"));
     this.router.addRoute("/design", () => ArticleListPage("design"));
-    this.router.addRoute("/article/:id", (params) => ArticlePage(params));
+    this.router.addRoute("/article/:id", (params: Record<string, string>) =>
+      ArticlePage(params)
+    );
     this.router.setNotFoundPage(() => NotFoundPage());
   }
 
   connectedCallback(): void {
     this.router.start();
+  }
+
+  disconnectedCallback(): void {
+    this.router.stop();
   }
 }

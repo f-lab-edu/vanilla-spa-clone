@@ -67,8 +67,9 @@ export default class ArticleList extends HTMLElement {
     event.preventDefault();
     const path = a.getAttribute("href");
 
-    history.pushState("", "", path);
-    window.dispatchEvent(new CustomEvent("pageNavigation"));
+    window.dispatchEvent(
+      new CustomEvent("pageNavigation", { detail: { path } })
+    );
   }
 
   connectedCallback(): void {
