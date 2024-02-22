@@ -17,27 +17,20 @@ const FETCHER_MAP: Record<string, () => Promise<Article[]>> = {
 export default class ArticleList extends HTMLElement {
   private readonly template: DocumentFragment | undefined;
   private readonly path: string;
-  private articles: Article[];
+  private articles: Article[] = [];
 
   constructor(path: string) {
     super();
     this.template = new DOMParser()
       .parseFromString(template, "text/html")
       .querySelector("template")?.content;
-    this.articles = [];
     this.path = path;
-  }
-
-  notifyArticleListLoaded(): void {
-    const event = new CustomEvent("articleListLoaded");
-    this.dispatchEvent(event);
   }
 
   async getArticles(): Promise<void> {
     const data = await FETCHER_MAP[this.path]();
     this.articles = data;
-
-    this.notifyArticleListLoaded();
+    this.dispatchEvent(new CustomEvent("articleListLoaded"));
   }
 
   addArticles(ulElement: HTMLUListElement): void {
@@ -52,13 +45,11 @@ export default class ArticleList extends HTMLElement {
     if (!this.template) return;
 
     const titleElement = this.template.querySelector(".article-list__title");
-
     if (titleElement) {
       titleElement.textContent = TITLE_MAP[this.path];
     }
 
     const ulElement = this.template.querySelector(".article-list__ul");
-
     if (ulElement instanceof HTMLUListElement) {
       this.addArticles(ulElement);
     }
@@ -66,11 +57,28 @@ export default class ArticleList extends HTMLElement {
     this.appendChild(this.template.cloneNode(true));
   }
 
-  connectedCallback(): void {
-    this.addEventListener("articleListLoaded", () => {
-      this.render();
-    });
+  handleNavigationClick(event: Event): void {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
 
+    const a = target.closest("a[data-navigation]");
+    if (!a) return;
+
+    event.preventDefault();
+    const path = a.getAttribute("href");
+
+    history.pushState("", "", path);
+    window.dispatchEvent(new CustomEvent("pageNavigation"));
+  }
+
+  connectedCallback(): void {
+    this.addEventListener("articleListLoaded", () => this.render());
+    this.addEventListener("click", this.handleNavigationClick);
     this.getArticles();
+  }
+
+  disconnectedCallback(): void {
+    this.removeEventListener("articleListLoaded", () => this.render());
+    this.removeEventListener("click", this.handleNavigationClick);
   }
 }
