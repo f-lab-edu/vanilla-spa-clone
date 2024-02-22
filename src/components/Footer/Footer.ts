@@ -2,7 +2,7 @@ import template from "./template.html";
 import "./style.css";
 
 export default class Footer extends HTMLElement {
-  private template: DocumentFragment | undefined;
+  private readonly template: DocumentFragment | undefined;
 
   constructor() {
     super();
@@ -12,8 +12,8 @@ export default class Footer extends HTMLElement {
   }
 
   connectedCallback(): void {
-    if (this.template) {
-      this.appendChild(this.template.cloneNode(true));
-    }
+    if (!this.template) return;
+
+    this.appendChild(this.template.cloneNode(true));
   }
 }
