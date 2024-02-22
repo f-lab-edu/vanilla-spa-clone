@@ -4,12 +4,12 @@ import "./style.css";
 import { getTechArticleList, getDesignArticleList } from "@/api/articleList";
 import { Article } from "@/types/types";
 
-const TITLE_MAP: { [key: string]: string } = {
+const TITLE_MAP: Record<string, string> = {
   tech: "개발",
   design: "디자인",
 };
 
-const FETCHER_MAP: { [key: string]: () => Promise<Article[]> } = {
+const FETCHER_MAP: Record<string, () => Promise<Article[]>> = {
   tech: getTechArticleList,
   design: getDesignArticleList,
 };
