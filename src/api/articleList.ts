@@ -14,7 +14,7 @@ export const getTechArticleList = async (): Promise<Article[]> => {
     return data;
   } catch (error) {
     if (axios.isAxiosError<{ message: string }>(error)) {
-      console.log(error.response?.data.message);
+      console.error(error.response?.data.message);
     }
 
     throw error;
@@ -33,7 +33,7 @@ export const getDesignArticleList = async (): Promise<Article[]> => {
     return data;
   } catch (error) {
     if (axios.isAxiosError<{ message: string }>(error)) {
-      console.log(error.response?.data.message);
+      console.error(error.response?.data.message);
     }
 
     throw error;
