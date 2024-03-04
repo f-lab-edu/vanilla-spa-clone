@@ -1,19 +1,16 @@
+import { parseTemplate } from "@/utils/parseTemplate";
 import template from "./template.html";
 import "./style.css";
 
 export default class Footer extends HTMLElement {
-  private readonly template: DocumentFragment | undefined;
+  private readonly template: DocumentFragment;
 
   constructor() {
     super();
-    this.template = new DOMParser()
-      .parseFromString(template, "text/html")
-      .querySelector("template")?.content;
+    this.template = parseTemplate(template);
   }
 
   connectedCallback(): void {
-    if (!this.template) return;
-
     this.appendChild(this.template.cloneNode(true));
   }
 }

@@ -1,3 +1,4 @@
+import { parseTemplate } from "@/utils/parseTemplate";
 import template from "./template.html";
 import "./style.css";
 
@@ -15,21 +16,18 @@ const FETCHER_MAP: Record<string, () => Promise<Article[]>> = {
 };
 
 export default class ArticleList extends HTMLElement {
-  private readonly template: DocumentFragment | undefined;
+  private readonly template: DocumentFragment;
   private readonly path: string;
   private articles: Article[] = [];
 
   constructor(path: string) {
     super();
-    this.template = new DOMParser()
-      .parseFromString(template, "text/html")
-      .querySelector("template")?.content;
+    this.template = parseTemplate(template);
     this.path = path;
   }
 
   async getArticles(): Promise<void> {
-    const data = await FETCHER_MAP[this.path]();
-    this.articles = data;
+    this.articles = await FETCHER_MAP[this.path]();
     this.dispatchEvent(new CustomEvent("articleListLoaded"));
   }
 

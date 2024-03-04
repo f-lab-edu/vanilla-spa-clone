@@ -1,14 +1,13 @@
+import { parseTemplate } from "@/utils/parseTemplate";
 import template from "./template.html";
 import "./style.css";
 
 export default class Header extends HTMLElement {
-  private readonly template: DocumentFragment | undefined;
+  private readonly template: DocumentFragment;
 
   constructor() {
     super();
-    this.template = new DOMParser()
-      .parseFromString(template, "text/html")
-      .querySelector("template")?.content;
+    this.template = parseTemplate(template);
   }
 
   handleNavigationClick(event: Event): void {
@@ -16,14 +15,13 @@ export default class Header extends HTMLElement {
 
     event.preventDefault();
     const path = event.target.getAttribute("href");
+
     window.dispatchEvent(
       new CustomEvent("pageNavigation", { detail: { path } })
     );
   }
 
   connectedCallback(): void {
-    if (!this.template) return;
-
     this.appendChild(this.template.cloneNode(true));
 
     const aList: NodeListOf<HTMLAnchorElement> =
