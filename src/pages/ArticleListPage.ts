@@ -1,7 +1,7 @@
 import ArticleList from "@/components/ArticleList/ArticleList";
 
-const ArticleListPage = (path = "tech") => {
-  const articleList = new ArticleList(path);
+const ArticleListPage = (path: string = "tech"): ArticleList => {
+  const articleList: ArticleList = new ArticleList(path);
 
   return articleList;
 };
