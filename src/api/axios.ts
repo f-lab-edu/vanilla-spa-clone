@@ -7,15 +7,20 @@ interface RequestOptions extends AxiosRequestConfig {
   data?: Record<string, string>;
 }
 
-const request = (options: RequestOptions): Promise<AxiosResponse> => {
+const request = async (options: RequestOptions): Promise<AxiosResponse> => {
   const { method = "GET", url, headers = {}, data } = options;
 
-  return axios({
-    method,
-    url,
-    headers,
-    data,
-  });
+  try {
+    const response = await axios({
+      method,
+      url,
+      headers,
+      data,
+    });
+    return response;
+  } catch (error) {
+    throw new Error("Request Error");
+  }
 };
 
 export default request;
