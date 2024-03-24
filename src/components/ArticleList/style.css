@@ -1,9 +1,8 @@
 .article-list__main {
   width: 100%;
   height: 100%;
-  margin: auto;
   max-width: 980px;
-  margin-bottom: 192px;
+  margin: auto auto 192px;
 }
 
 .container {
@@ -32,8 +31,8 @@
   margin-inline-end: 0;
   display: grid;
   grid-row-gap: 80px;
-  margin: 16px 0px;
-  padding: 0px;
+  margin: 16px 0;
+  padding: 0;
 }
 
 @media (max-width: 700px) {

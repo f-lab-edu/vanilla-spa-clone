@@ -3,9 +3,10 @@
   height: auto;
   border-bottom: 1px solid rgba(0, 27, 55, 0.1);
   position: sticky;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   background-color: #ffffff;
+  z-index: 1;
 }
 
 .header__wrap {
@@ -107,6 +108,7 @@
   }
 
   .nav {
+    display: none;
     width: calc(100% + 48px);
     margin: 0 -24px;
     flex-direction: column;
@@ -133,7 +135,7 @@
 
   .nav__list-button {
     width: 100%;
-    padding: 14px 0px;
+    padding: 14px 0;
     margin: 16px 20px;
   }
 }

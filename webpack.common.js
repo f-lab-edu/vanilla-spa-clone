@@ -3,9 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   target: "web",
-  entry: path.resolve(__dirname, "src/index.js"),
+  entry: path.resolve(__dirname, "src/index.ts"),
   resolve: {
-    extensions: [".js"],
+    extensions: [".ts", ".js"],
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
@@ -19,6 +19,13 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "ts-loader",
+        },
+      },
       {
         test: /\.js$/i,
         exclude: /node_modules/,
