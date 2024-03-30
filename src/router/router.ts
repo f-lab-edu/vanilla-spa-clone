@@ -2,7 +2,7 @@ import Section from "@/components/Section/Section";
 
 interface Routes {
   regex: RegExp;
-  page: any;
+  page: (params: Record<string, string>) => HTMLElement;
   params: string[];
 }
 
