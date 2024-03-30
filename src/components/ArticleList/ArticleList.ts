@@ -3,9 +3,9 @@ import template from "./template.html";
 import "./style.css";
 
 import { getTechArticleList, getDesignArticleList } from "@/api/articleList";
-import { Article } from "@/types/types";
+import { Article, ArticlePath } from "@/types/types";
 
-const TITLE_MAP: Record<string, string> = {
+const TITLE_MAP: Record<ArticlePath, string> = {
   tech: "개발",
   design: "디자인",
 };
