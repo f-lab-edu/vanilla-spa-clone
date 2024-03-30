@@ -40,8 +40,6 @@ export default class ArticleList extends HTMLElement {
   }
 
   render(): void {
-    if (!this.template) return;
-
     const titleElement = this.template.querySelector(".article-list__title");
     if (titleElement) {
       titleElement.textContent = TITLE_MAP[this.path];
