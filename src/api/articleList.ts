@@ -1,9 +1,12 @@
-import { AxiosResponse } from "axios";
 import request from "./axios";
 import { Article } from "@/types/types";
 
+interface ResponseData<T> {
+  results: T;
+}
+
 export const getTechArticleList = async (): Promise<Article[]> => {
-  const response: AxiosResponse = await request({
+  const response = await request<ResponseData<Article[]>>({
     method: "GET",
     url: "data/mockTechArticleList.json",
   });
@@ -14,7 +17,7 @@ export const getTechArticleList = async (): Promise<Article[]> => {
 };
 
 export const getDesignArticleList = async (): Promise<Article[]> => {
-  const response: AxiosResponse = await request({
+  const response = await request<ResponseData<Article[]>>({
     method: "GET",
     url: "data/mockDesignArticleList.json",
   });
