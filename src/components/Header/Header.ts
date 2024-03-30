@@ -31,13 +31,4 @@ export default class Header extends HTMLElement {
       a.addEventListener("click", this.handleNavigationClick);
     });
   }
-
-  disconnectedCallback(): void {
-    const aList: NodeListOf<HTMLAnchorElement> =
-      this.querySelectorAll("a[data-navigation]");
-
-    aList.forEach((a) => {
-      a.removeEventListener("click", this.handleNavigationClick);
-    });
-  }
 }

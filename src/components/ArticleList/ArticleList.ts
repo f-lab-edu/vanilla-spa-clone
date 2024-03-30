@@ -10,17 +10,17 @@ const TITLE_MAP: Record<ArticlePath, string> = {
   design: "디자인",
 };
 
-const FETCHER_MAP: Record<string, () => Promise<Article[]>> = {
+const FETCHER_MAP: Record<ArticlePath, () => Promise<Article[]>> = {
   tech: getTechArticleList,
   design: getDesignArticleList,
 };
 
 export default class ArticleList extends HTMLElement {
   private readonly template: DocumentFragment;
-  private readonly path: string;
+  private readonly path: ArticlePath;
   private articles: Article[] = [];
 
-  constructor(path: string) {
+  constructor(path: ArticlePath) {
     super();
     this.template = parseTemplate(template);
     this.path = path;
@@ -72,10 +72,5 @@ export default class ArticleList extends HTMLElement {
     this.addEventListener("articleListLoaded", () => this.render());
     this.addEventListener("click", this.handleNavigationClick);
     this.getArticles();
-  }
-
-  disconnectedCallback(): void {
-    this.removeEventListener("articleListLoaded", () => this.render());
-    this.removeEventListener("click", this.handleNavigationClick);
   }
 }
