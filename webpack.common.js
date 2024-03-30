@@ -5,7 +5,7 @@ module.exports = {
   target: "web",
   entry: path.resolve(__dirname, "src/index.ts"),
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts"],
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
