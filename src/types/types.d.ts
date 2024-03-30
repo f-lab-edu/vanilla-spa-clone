@@ -5,3 +5,5 @@ export interface Article {
   id: string;
   imageUrl: string;
 }
+
+export type ArticlePath = "tech" | "design";
