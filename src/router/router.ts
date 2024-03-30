@@ -71,18 +71,22 @@ export default class Router {
     this.section.appendChild(route.page(params));
   }
 
+  handlePopState(): void {
+    this.checkRoutes();
+  }
+
+  handlePageNavigation(event: CustomEvent): void {
+    this.navigate(event.detail.path);
+  }
+
   start(): void {
-    window.addEventListener("popstate", () => this.checkRoutes());
-    window.addEventListener("pageNavigation", (event) =>
-      this.navigate(event.detail.path)
-    );
+    window.addEventListener("popstate", this.handlePopState);
+    window.addEventListener("pageNavigation", this.handlePageNavigation);
     this.checkRoutes();
   }
 
   stop(): void {
-    window.removeEventListener("popstate", () => this.checkRoutes());
-    window.removeEventListener("pageNavigation", (event) =>
-      this.navigate(event.detail.path)
-    );
+    window.removeEventListener("popstate", this.handlePopState);
+    window.removeEventListener("pageNavigation", this.handlePageNavigation);
   }
 }
