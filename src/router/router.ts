@@ -1,8 +1,10 @@
 import Section from "@/components/Section/Section";
 
+type Page = (params?: Record<string, string>) => HTMLElement;
+
 interface Routes {
   regex: RegExp;
-  page: (params: Record<string, string>) => HTMLElement;
+  page: Page;
   params: string[];
 }
 
@@ -10,7 +12,9 @@ export default class Router {
   private section: Section;
   private routes: Routes[] = [];
   private currentPath: string | null = null;
-  private notFoundPage: any = null;
+  private notFoundPage: Page | null = null;
+  private boundHandlePopState = this.handlePopState.bind(this);
+  private boundHandlePageNavigation = this.handlePageNavigation.bind(this);
 
   constructor(section: Section) {
     this.section = section;
@@ -41,7 +45,7 @@ export default class Router {
     return params;
   }
 
-  setNotFoundPage(page: any): void {
+  setNotFoundPage(page: Page): void {
     this.notFoundPage = page;
   }
 
@@ -62,6 +66,7 @@ export default class Router {
     this.section.innerHTML = "";
 
     if (!route) {
+      if (this.notFoundPage === null) return;
       this.section.appendChild(this.notFoundPage());
       return;
     }
@@ -80,13 +85,16 @@ export default class Router {
   }
 
   start(): void {
-    window.addEventListener("popstate", this.handlePopState);
-    window.addEventListener("pageNavigation", this.handlePageNavigation);
+    window.addEventListener("popstate", this.boundHandlePopState);
+    window.addEventListener("pageNavigation", this.boundHandlePageNavigation);
     this.checkRoutes();
   }
 
   stop(): void {
-    window.removeEventListener("popstate", this.handlePopState);
-    window.removeEventListener("pageNavigation", this.handlePageNavigation);
+    window.removeEventListener("popstate", this.boundHandlePopState);
+    window.removeEventListener(
+      "pageNavigation",
+      this.boundHandlePageNavigation
+    );
   }
 }
