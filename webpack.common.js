@@ -5,7 +5,7 @@ module.exports = {
   target: "web",
   entry: path.resolve(__dirname, "src/index.ts"),
   resolve: {
-    extensions: [".ts"],
+    extensions: [".ts", ".js"],
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
@@ -24,16 +24,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "ts-loader",
-        },
-      },
-      {
-        test: /\.js$/i,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
         },
       },
       {
