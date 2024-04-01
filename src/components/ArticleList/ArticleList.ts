@@ -27,8 +27,14 @@ export default class ArticleList extends HTMLElement {
   }
 
   async getArticles(): Promise<void> {
-    this.articles = await FETCHER_MAP[this.path]();
-    this.dispatchEvent(new CustomEvent("articleListLoaded"));
+    try {
+      this.articles = await FETCHER_MAP[this.path]();
+      this.dispatchEvent(new CustomEvent("articleListLoaded"));
+    } catch (error) {
+      window.dispatchEvent(
+        new CustomEvent("pageNavigation", { detail: { path: "/error" } })
+      );
+    }
   }
 
   addArticles(ulElement: HTMLUListElement): void {
