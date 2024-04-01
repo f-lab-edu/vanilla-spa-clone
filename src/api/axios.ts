@@ -12,17 +12,14 @@ const request = async <T>(
 ): Promise<AxiosResponse<T>> => {
   const { method = "GET", url, headers = {}, data } = options;
 
-  try {
-    const response = await axios({
-      method,
-      url,
-      headers,
-      data,
-    });
-    return response;
-  } catch (error) {
-    throw new Error("Request Error");
-  }
+  const response = await axios({
+    method,
+    url,
+    headers,
+    data,
+  });
+
+  return response;
 };
 
 export default request;
