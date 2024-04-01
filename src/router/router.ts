@@ -20,7 +20,7 @@ export default class Router {
     this.section = section;
   }
 
-  addRoute(path: string, page: any): void {
+  addRoute(path: string, page: Page): void {
     const params: string[] = [];
 
     const parsedPath = path.replace(/:(\w+)/g, (substring, paramName) => {
@@ -66,8 +66,11 @@ export default class Router {
     this.section.innerHTML = "";
 
     if (!route) {
-      if (this.notFoundPage === null) return;
-      this.section.appendChild(this.notFoundPage());
+      if (this.notFoundPage) {
+        this.section.appendChild(this.notFoundPage());
+      } else {
+        this.section.innerHTML = "페이지를 찾을 수 없습니다2.";
+      }
       return;
     }
 
