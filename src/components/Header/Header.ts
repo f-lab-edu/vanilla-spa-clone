@@ -47,5 +47,11 @@ export default class Header extends HTMLElement {
         img?.setAttribute("src", "./assets/hamburger-icon.svg");
       }
     });
+
+    const navButton = this.querySelector(".nav__list-button");
+
+    navButton?.addEventListener("click", () => {
+      window.location.href = "https://toss.im/career/jobs";
+    });
   }
 }
