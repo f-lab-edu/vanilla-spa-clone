@@ -108,14 +108,16 @@
   }
 
   .nav {
-    display: none;
+    max-height: 0;
+    overflow: hidden;
     width: calc(100% + 48px);
     margin: 0 -24px;
     flex-direction: column;
+    transition: 0.8s ease;
   }
 
   .active {
-    display: block;
+    max-height: 100vh;
   }
 
   .nav__list {

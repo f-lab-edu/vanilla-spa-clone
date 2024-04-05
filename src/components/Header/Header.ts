@@ -36,6 +36,16 @@ export default class Header extends HTMLElement {
 
     menuButton?.addEventListener("click", () => {
       nav?.classList.toggle("active");
+
+      const img = menuButton?.querySelector("img");
+
+      if (nav?.classList.contains("active")) {
+        menuButton?.setAttribute("aria-label", "메뉴 닫기");
+        img?.setAttribute("src", "./assets/close.svg");
+      } else {
+        menuButton?.setAttribute("aria-label", "메뉴 열기");
+        img?.setAttribute("src", "./assets/hamburger-icon.svg");
+      }
     });
   }
 }
