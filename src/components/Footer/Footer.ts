@@ -12,5 +12,11 @@ export default class Footer extends HTMLElement {
 
   connectedCallback(): void {
     this.appendChild(this.template.cloneNode(true));
+
+    const sectionButton = this.querySelector(".footer__section-button");
+
+    sectionButton?.addEventListener("click", () => {
+      window.location.href = "https://toss.im/career/jobs";
+    });
   }
 }
