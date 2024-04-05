@@ -30,5 +30,12 @@ export default class Header extends HTMLElement {
     aList.forEach((a) => {
       a.addEventListener("click", this.handleNavigationClick);
     });
+
+    const menuButton = this.querySelector(".header__menu-button");
+    const nav = this.querySelector(".nav");
+
+    menuButton?.addEventListener("click", () => {
+      nav?.classList.toggle("active");
+    });
   }
 }

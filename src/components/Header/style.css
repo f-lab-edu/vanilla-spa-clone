@@ -114,6 +114,10 @@
     flex-direction: column;
   }
 
+  .active {
+    display: block;
+  }
+
   .nav__list {
     flex-direction: column;
   }
